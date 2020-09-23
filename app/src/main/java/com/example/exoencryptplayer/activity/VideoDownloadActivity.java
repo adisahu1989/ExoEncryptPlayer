@@ -2,6 +2,7 @@ package com.example.exoencryptplayer.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -194,14 +195,15 @@ public class VideoDownloadActivity extends AppCompatActivity implements NetworkC
         {
             filename.delete();
         }
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.cancel(0);
+        NotificationManagerCompat notificationCompat = NotificationManagerCompat.from(getApplicationContext());
+
+        notificationCompat.cancel(0);
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         Log.d("VideoDownloadActivity","On Destroy call");
         cancelNotification();
+        super.onDestroy();
     }
 }

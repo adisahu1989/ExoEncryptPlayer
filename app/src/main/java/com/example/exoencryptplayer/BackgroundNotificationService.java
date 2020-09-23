@@ -5,6 +5,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Environment;
@@ -30,7 +31,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 
-public class BackgroundNotificationService extends JobIntentService {
+public class BackgroundNotificationService extends JobIntentService{
     private static final String TAG = "BackgroundNotificationService";
     private ResponseBody responseBody;
     /**
@@ -146,12 +147,10 @@ public class BackgroundNotificationService extends JobIntentService {
         notificationBuilder.setProgress(0, 0, false);
         notificationBuilder.setContentText("Image Download Complete");
         notificationManager.notify(0, notificationBuilder.build());
-
     }
 
     @Override
     public void onTaskRemoved(Intent rootIntent) {
         notificationManager.cancel(0);
     }
-    
 }
